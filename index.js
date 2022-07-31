@@ -85,6 +85,10 @@ app.post("/set-theme", checkAuth, async(req,res,next)=> {
     db.current_theme = req.body.theme;
     db.current_color = req.body.color;
     db.bubble_delay = req.body.delay;
+    if(req.body.theme === "custom"){
+        db.themes.custom.color1 = req.body.color1,
+        db.themes.custom.color2 = req.body.color2
+    }
     await fs.writeFileSync('./db.json', JSON.stringify(db));
     res.send({
         success: true,
